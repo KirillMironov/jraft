@@ -2,6 +2,7 @@ import com.alipay.sofa.jraft.Iterator
 import com.alipay.sofa.jraft.Status
 import com.alipay.sofa.jraft.core.StateMachineAdapter
 import com.alipay.sofa.jraft.entity.LeaderChangeContext
+import com.alipay.sofa.jraft.error.RaftException
 import org.slf4j.LoggerFactory
 
 class StateMachine : StateMachineAdapter() {
@@ -9,6 +10,10 @@ class StateMachine : StateMachineAdapter() {
 
     override fun onApply(p0: Iterator?) {
         logger.info("onApply: {}", p0)
+    }
+
+    override fun onError(e: RaftException?) {
+        logger.error("onError: {}", e.toString())
     }
 
     override fun onLeaderStart(p0: Long) {

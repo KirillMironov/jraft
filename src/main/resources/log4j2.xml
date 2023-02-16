@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} (%t) %-5level [%c{1}] %m%n"/>
+        </Console>
+        <File name="File" fileName="jraft.log" immediateFlush="true" append="false">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} (%t) %-5level [%c{1}] %m%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Logger name="Node" level="all">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="StateMachine" level="all">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Root level="all">
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>
