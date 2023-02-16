@@ -78,7 +78,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>Main</mainClass>
+                            <mainClass>MainKt</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
