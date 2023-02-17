@@ -10,8 +10,7 @@ class Node(
     private val peers: List<String>,
     logsDirectory: String,
     stateMachine: StateMachine,
-)
-{
+) {
     private val raftGroupService: RaftGroupService
     private val node: com.alipay.sofa.jraft.Node
 
