@@ -1,16 +1,15 @@
 import com.alipay.sofa.jraft.JRaftUtils
 import com.alipay.sofa.jraft.RaftGroupService
-import com.alipay.sofa.jraft.conf.Configuration
 import com.alipay.sofa.jraft.option.NodeOptions
 import org.slf4j.LoggerFactory
 
 class Node(
     groupId: String,
-    serverId: String,
-    peers: List<String>,
+    peer: String,
+    peers: String,
     logsDirectory: String,
     stateMachine: StateMachine,
-    electionTimeoutMs: Int = 5000,
+    electionTimeoutMs: Int = 1000,
 ) {
     private val logger = LoggerFactory.getLogger(javaClass)
 
@@ -20,13 +19,13 @@ class Node(
         val options = NodeOptions()
 
         options.fsm = stateMachine
-        options.initialConf = Configuration(peers.map { JRaftUtils.getPeerId(it) })
         options.logUri = logsDirectory
         options.raftMetaUri = logsDirectory
         options.snapshotUri = logsDirectory
         options.electionTimeoutMs = electionTimeoutMs
+        options.initialConf = JRaftUtils.getConfiguration(peers)
 
-        val peerId = JRaftUtils.getPeerId(serverId)
+        val peerId = JRaftUtils.getPeerId(peer)
 
         raftGroupService = RaftGroupService(groupId, peerId, options)
     }
@@ -34,6 +33,6 @@ class Node(
     fun start() {
         val node = raftGroupService.start()
 
-        logger.info("Starting node with groupId: ${node.groupId}, nodeId: ${node.nodeId}, and peers: ${node.listPeers()}")
+        logger.info("Starting node with id: ${node.nodeId}")
     }
 }
