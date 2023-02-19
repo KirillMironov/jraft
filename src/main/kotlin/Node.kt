@@ -1,5 +1,6 @@
 import com.alipay.sofa.jraft.JRaftUtils
 import com.alipay.sofa.jraft.RaftGroupService
+import com.alipay.sofa.jraft.StateMachine
 import com.alipay.sofa.jraft.option.NodeOptions
 import org.slf4j.LoggerFactory
 
